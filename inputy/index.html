@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>inputy</title>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+
+
+
+class App extends React.Component { 
+    constructor() {
+        super();
+        this.state = {imie: "", nazwisko: ""};
+        this.inputHandler = this.inputHandler.bind(this);
+    }
+    inputHandler(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+    
+
+render() {
+  return (
+    <div>
+      <dialog open>
+        <input name='imie' onInput = {this.inputHandler}></input>
+        <input name="nazwisko" onInput = {this.inputHandler}></input>
+        <p>Użytkownik: {this.state.imie} {this.state.nazwisko}</p>
+      </dialog>
+    </div>
+  );
+}
+}
+  ReactDOM.render(
+    <App/>,
+    document.getElementById('app')
+  );
+  </script>
+</body>
+
+</html>
