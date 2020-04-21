@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Licznik</title>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+
+
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {counter: 0, counter2: 0};
+  }
+
+  increment() {
+    this.setState({
+      counter: this.state.counter + 1,
+      counter2: this.state.counter2 + 1
+    })
+    }
+    decrement() {
+    this.setState({
+      counter: this.state.counter - 1,
+      counter2: this.state.counter2 + 1
+    })
+    }
+   
+  render() {
+    return (
+      <div>
+        <output>Suma: {this.state.counter} </output>
+        <button onClick = {this.increment.bind(this)}>+</button>
+        <button onClick = {this.decrement.bind(this)} >-</button>
+        <output>Wszystkie kliknięcia: {this.state.counter2}</output>
+      </div>
+    );
+  }
+}
+  ReactDOM.render(
+    <App />,
+    document.getElementById('app')
+  );
+  </script>
+</body>
+
+</html>
