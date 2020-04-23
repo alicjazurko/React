@@ -14,18 +14,24 @@
   <script type="text/babel">
    
    class App extends React.Component {
-
-    state = {
-        text: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: ''
+        }
     }
+    
+    // state = {
+    //         text: ''
+    //     }
 
-    handleClick = () => {
+    handleClick(){
         // console.log('dziala');
         // this.state.text += "a";
         // document.querySelector('h1').textContent = this.state.text;
-        const letter = "a";
+        const number = Math.floor(Math.random()*10);
         this.setState({
-            text: this.state.text + letter
+            text: this.state.text + number
         })
     }
 
@@ -33,15 +39,22 @@
     render() {
         return(
             <div>
-                <button onClick = {this.handleClick}>Dodaj literkę A</button>
-                <h1>{this.state.text}</h1> 
+                <button onClick = {this.handleClick.bind(this)}>{this.props.btnTitle}</button>
+                <PanelResult text={this.state.text}/>
+                <PanelResult text={this.state.text}/>
             </div>
         )
     }
-    
    }
 
-   ReactDOM.render(<App />, document.getElementById('app'));
+   const PanelResult = (props) => {
+       return (
+           <h1>{props.text}</h1>
+       )
+   }
+
+
+   ReactDOM.render(<App btnTitle = "Dodaj cyfrę"/>, document.getElementById('app'));
 
   </script>
     
