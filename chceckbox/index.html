@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pierwszy komponent w React.js</title>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+const PositiveMessage = () => <p>Możesz obejrzeć film.</p>
+const NegativeMessage = () => <p>Nie możesz obejrzeć tego filmu.</p>
+
+class CheckboxAgeConfirmation extends React.Component {
+    state = {
+        isConfirmed: false
+    }
+
+    handleCheckboxChange = () => {
+        this.setState({
+            isConfirmed: !this.state.isConfirmed
+        })
+    }
+
+    displayMessage = () => {
+        if(this.state.isConfirmed) {
+            return <PositiveMessage/>
+        } else {
+            return <NegativeMessage/>
+        }
+    }
+    render() {
+        console.log(this.state.isConfirmed)
+        return(
+        <div>
+            <h1>Kup bilet na horror roku</h1>
+            <input type="checkbox" id="age" onChange={this.handleCheckboxChange} checked={this.state.isConfirmed}/>
+            <label htmlFor="age">Mam conajmniej 16 lat</label>
+            {this.displayMessage()}
+        </div>
+        )
+    }
+}
+
+ReactDOM.render(<CheckboxAgeConfirmation/>, document.getElementById('root'));
+
+  </script>
+</body>
+
+</html>
