@@ -18,29 +18,49 @@ const NegativeMessage = () => <p>Nie możesz obejrzeć tego filmu.</p>
 
 class CheckboxAgeConfirmation extends React.Component {
     state = {
-        isConfirmed: false
+        isConfirmed: false,
+        isFormSubmitted: false
     }
 
     handleCheckboxChange = () => {
         this.setState({
-            isConfirmed: !this.state.isConfirmed
+            isConfirmed: !this.state.isConfirmed,
+            isFormSubmitted: false
         })
     }
 
-    displayMessage = () => {
-        if(this.state.isConfirmed) {
-            return <PositiveMessage/>
-        } else {
-            return <NegativeMessage/>
+    handleFormSubmit = (e) => {
+        e.preventDefault() //usuwanie pierwotnej wartości  przeładoania strony
+        if(!this.state.isFormSubmitted) {
+            this.setState({
+                isFormSubmitted: true
+            })
         }
+        
+        
+    }
+
+    displayMessage = () => {
+        if(this.state.isFormSubmitted) {
+            if(this.state.isConfirmed) {
+                return <PositiveMessage/>
+            } else {
+                return <NegativeMessage/>
+            }
+        }
+        
     }
     render() {
         console.log(this.state.isConfirmed)
         return(
         <div>
             <h1>Kup bilet na horror roku</h1>
-            <input type="checkbox" id="age" onChange={this.handleCheckboxChange} checked={this.state.isConfirmed}/>
-            <label htmlFor="age">Mam conajmniej 16 lat</label>
+            <form onSubmit={this.handleFormSubmit}>
+                <input type="checkbox" id="age" onChange={this.handleCheckboxChange} checked={this.state.isConfirmed}/>
+                <label htmlFor="age">Mam conajmniej 16 lat</label>
+                <button>kup bilet</button>
+            </form>
+            
             {this.displayMessage()}
         </div>
         )
